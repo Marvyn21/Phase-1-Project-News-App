@@ -20,7 +20,7 @@ const ENTERTAINMENT_NEWS = "https://newsapi.org/v2/top-headlines?country=us&cate
 const SEARCH_NEWS = "https://newsapi.org/v2/everything?q=";
 
 window.onload = function(){
-    newsType.innerHTML="<h4 class="text-center"; >Headlines<h4>";
+    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold'>Headlines<h4>";
     fetchHeadlines();
 };
 
@@ -28,27 +28,27 @@ window.onload = function(){
 let newsDataArr = [];
 
 trendBtn.addEventListener("click", function() {
-    newsType.innerHTML="<h4>Current Trends<h4>";
+    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold' >Current Trends<h4>";
     fetchTrendingNews();
 });
 
 techBtn.addEventListener("click", function() {
-    newsType.innerHTML="<h4>Tech News<h4>";
+    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold' >Tech News<h4>";
     fetchTechNews();
 });
 
 businessBtn.addEventListener("click", function() {
-    newsType.innerHTML="<h4>Busines News<h4>";
+    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold' >Busines News<h4>";
     fetchBusinesNews();
 });
 
 sportsBtn.addEventListener("click", function() {
-    newsType.innerHTML="<h4>Sports<h4>";
+    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold' >Sports<h4>";
     fetchSportsNews();
 });
 
 entertainmentBtn.addEventListener("click", function() {
-    newsType.innerHTML="<h4>Entertainment<h4>";
+    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold' >Entertainment<h4>";
     fetchEntertainmentNews();
 });
 
