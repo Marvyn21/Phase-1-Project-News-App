@@ -1,1 +1,2 @@
 # Phase-1-Project-News-App
+This is a JavaScript program that fetches news articles from the News API and displays them on a web page. It uses HTML and CSS to create a user interface, and JavaScript to interact with the News API. Overall, this program is a simple example of how to use the News API to fetch and display news articles on a web page. It can be extended by adding more categories or by customizing the user interface.
