@@ -10,7 +10,7 @@ const newsQuery = document.getElementById("queryNews");
 const newsType = document.getElementById("newType");
 const newsDetails = document.getElementById("newsdetails");
 
-const BASE_URL = "http://api.mediastack.com/v1/";
+const BASE_URL = "https://api.mediastack.com/v1/";
 const ACCESS_KEY = "b62f88b4e1f80329330e71fbebf91b98";
 
 const HEADLINE_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY;
