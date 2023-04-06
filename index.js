@@ -1,5 +1,5 @@
 // declare variables
-const trendBtn = document.getElementById("Trends");
+const healthBtn = document.getElementById("Trends");
 const techBtn = document.getElementById("technology");
 const businessBtn = document.getElementById("business");
 const sportsBtn = document.getElementById("sport");
@@ -10,18 +10,17 @@ const newsQuery = document.getElementById("queryNews");
 const newsType = document.getElementById("newType");
 const newsDetails = document.getElementById("newsdetails");
 
-const BASE_URL = "https://api.mediastack.com/v1/";
-const ACCESS_KEY = "b62f88b4e1f80329330e71fbebf91b98";
 
-const HEADLINE_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY;
-const TRENDING_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY + "&sort=trend";
-const TECH_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY + "&categories=technology";
-const BUSINESS_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY + "&categories=business";
-const SPORTS_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY + "&categories=sport";
-const ENTERTAINMENT_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY + "&categories=entertainment";
-const SEARCH_NEWS = BASE_URL + "news?access_key=" + ACCESS_KEY + "&q=";
-
-
+// const API_KEY = "BTjwcYfPejtgwfZ1z3mdC5tzGHUexeynpd40Qmc5Vlw";
+const DEFAULT_IMAGE_PATH = "path/to/default/image.jpg";
+const BASE_URL = "https://saurav.tech/NewsAPI/";
+const HEADLINE_NEWS = "https://saurav.tech/NewsAPI/top-headlines/category/general/us.json";
+const HEALTH_NEWS =  "https://saurav.tech/NewsAPI/top-headlines/category/health/us.json";
+const TECH_NEWS = "https://saurav.tech/NewsAPI/top-headlines/category/technology/us.json";
+const BUSINESS_NEWS = "https://saurav.tech/NewsAPI/top-headlines/category/business/us.json";
+const SPORTS_NEWS = "https://saurav.tech/NewsAPI/top-headlines/category/sports/us.json";
+const ENTERTAINMENT_NEWS = "https://saurav.tech/NewsAPI/top-headlines/category/entertainment/us.json";
+const SEARCH_NEWS = `${BASE_URL}search?q=`;
 
 window.onload = function(){
     newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold'>Headlines<h4>";
@@ -31,9 +30,9 @@ window.onload = function(){
 
 let newsDataArr = [];
 
-trendBtn.addEventListener("click", function() {
-    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold' >Current Trends<h4>";
-    fetchTrendingNews();
+healthBtn.addEventListener("click", function() {
+    newsType.innerHTML="<h4 class='text-center my-4 text-uppercase font-weight-bold' >Health News<h4>";
+    fetchHealthNews();
 });
 
 techBtn.addEventListener("click", function() {
@@ -62,92 +61,86 @@ searchBtn.addEventListener("click", function() {
 });
 
 
-
 // fetch
+
 const fetchHeadlines = async () => {
-    const response = await fetch(BASE_URL + "news" + "?access_key=" + ACCESS_KEY);
+    const response = await fetch(HEADLINE_NEWS);
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300){
         const myJson = await response.json();
         console.log(myJson)
-        newsDataArr = myJson.data;
+        newsDataArr = myJson.articles;
     } else{
         console.log(response.status, response.statusText);
     }
-
 
     displayNews();
 }
 
-const fetchTrendingNews = async () => {
-    const response = await fetch(BASE_URL + "news" + "?access_key=" + ACCESS_KEY + "&sort=popularity&countries=us");
+const fetchHealthNews = async () => {
+    const response = await fetch(HEALTH_NEWS);
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300){
         const myJson = await response.json();
         console.log(myJson)
-        newsDataArr = myJson.data;
+        newsDataArr = myJson.articles;
     } else{
         console.log(response.status, response.statusText);
     }
-
 
     displayNews();
 }
 
 const fetchTechNews = async () => {
-    const response = await fetch(BASE_URL + "news" + "?access_key=" + ACCESS_KEY + "&categories=technology");
+    const response = await fetch(TECH_NEWS);
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300){
         const myJson = await response.json();
-        newsDataArr = myJson.data;
+        newsDataArr = myJson.articles;
     } else{
         console.log(response.status, response.statusText);
     }
-
 
     displayNews();
 }
 
 const fetchBusinesNews = async () => {
-    const response = await fetch(BASE_URL + "news" + "?access_key=" + ACCESS_KEY + "&categories=business");
+    const response = await fetch(BUSINESS_NEWS);
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300){
         const myJson = await response.json();
-        newsDataArr = myJson.data;
+        newsDataArr = myJson.articles;
     } else{
         console.log(response.status, response.statusText);
     }
-
 
     displayNews();
 }
 
 const fetchSportsNews = async () => {
-    const response = await fetch(BASE_URL + "news" + "?access_key=" + ACCESS_KEY + "&categories=sport");
+    const response = await fetch(SPORTS_NEWS);
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300){
         const myJson = await response.json();
-        newsDataArr = myJson.data;
+        newsDataArr = myJson.articles;
     } else{
         console.log(response.status, response.statusText);
     }
-
 
     displayNews();
 }
 
 
 const fetchEntertainmentNews = async () => {
-    const response = await fetch(BASE_URL + "news" + "?access_key=" + ACCESS_KEY + "&categories=entertainment");
+    const response = await fetch(ENTERTAINMENT_NEWS);
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300){
         const myJson = await response.json();
         console.log(myJson)
-        newsDataArr = myJson.data;
+        newsDataArr = myJson.articles;
     } else{
         console.log(response.status, response.statusText);
     }
-
 
     displayNews();
 }
@@ -158,15 +151,14 @@ const fetchQueryNews = async () => {
         return;
     }
 
-    const response = await fetch(BASE_URL + "news" + "?access_key=" + ACCESS_KEY + "&q=" + encodeURIComponent(newsQuery.value));
+    const response = await fetch(SEARCH_NEWS + encodeURIComponent(newsQuery.value));
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300){
         const myJson = await response.json();
-        newsDataArr = myJson.data;
+        newsDataArr = myJson.articles;
     } else{
         console.log(response.status, response.statusText);
     }
-
 
     displayNews();
 }
@@ -182,7 +174,7 @@ function displayNews(){
 
     newsDataArr.forEach(news => {
 
-        let date = news.published_at.split("T");
+        let date = news.publishedAt.split("T");
 
         let col = document.createElement('div');
         col.className="col-sm-12 col-md-4 col-lg-3 p-2 card";
@@ -193,14 +185,14 @@ function displayNews(){
         let image = document.createElement('img');
         image.setAttribute("height", "matchparnt");
         image.setAttribute("width", "100%");
-        if (news.image) {
-            image.src = news.image;
+        if (news.urlToImage) {
+            image.src = news.urlToImage;
           } else {
             // Set the default image source here
             image.src = "path/to/default/image.jpg";
           }
 
-        // image.src=news.image;
+        // image.src=news.image_url;
 
         let cardBody = document.createElement('div');
 
@@ -235,3 +227,4 @@ function displayNews(){
         newsDetails.appendChild(col);
     })
 }
+
